@@ -3,16 +3,15 @@ package com.gestion.login.controlador;
 import com.gestion.login.entidad.Usuario;
 import com.gestion.login.entidad.UsuarioDto;
 import com.gestion.login.service.UsuarioService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 public class UsuarioControlador {
 
     @Autowired
@@ -38,5 +37,6 @@ public class UsuarioControlador {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+
 }
 

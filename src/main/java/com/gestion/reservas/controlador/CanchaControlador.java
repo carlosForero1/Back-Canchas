@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/cancha")
+@CrossOrigin(origins = "http://localhost:3000")
 public class CanchaControlador {
 
     @Autowired
@@ -31,7 +32,7 @@ public class CanchaControlador {
 
     }
 
-    @GetMapping("/crear")
+    @PostMapping("/crear")
     public String crearCancha(@RequestBody Cancha cancha) {
 
         if (cancha != null) {
@@ -56,6 +57,11 @@ public class CanchaControlador {
         } else {
             return "Error consultar con el administrador";
         }
-
     }
+    @GetMapping("/{id}")
+    public Cancha obtenerCanchaPorId(@PathVariable Long id) {
+        return service.buscarPorId(id)
+                .orElse(null); // O lanza excepción si prefieres manejar errores
+    }
+
 }

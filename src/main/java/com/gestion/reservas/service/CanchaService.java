@@ -31,6 +31,11 @@ public class CanchaService {
 
     }
 
+    public Optional<Cancha> buscarPorId(Long id) {
+        return repositorio.findById(id);
+    }
+
+
     public void eliminarCancha(Long id) {
         try {
             repositorio.deleteById(id);

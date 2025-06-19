@@ -26,28 +26,37 @@ public class ReservaServices {
         String mensajeHtml = "<p>Gracias por reservar con nosotros.</p>" +
                 "<p>Estos son los métodos de pago disponibles:</p>" +
                 "<img src='cid:imagenMediosPago' alt='Medios de Pago' />";
+        String ubicacionImagen = "static/metodoPagos.png";
 
-        String UbicacionImagen = "static/metodoPagos.png";
+        if (reserva != null) {
+            List<Reserva> reservas = repositorio.findAll();
+            boolean yaExiste = reservas.stream().anyMatch(r ->
+                    r.getHorarioReserva().getTime() == reserva.getHorarioReserva().getTime());
 
-        if (reserva != null){
+            if (yaExiste) {
+                System.out.println("Ya existe una reserva para esa cancha en ese horario.");
+                return null;
+            }
+
             try {
-                serviceEmail.enviarCorreo(reserva.getCorreo(),asunto, UbicacionImagen, mensajeHtml);
-            }catch (Exception e){
-                System.out.println(e);
+                serviceEmail.enviarCorreo(reserva.getCorreo(), asunto, ubicacionImagen, mensajeHtml);
+            } catch (Exception e) {
+                System.out.println("Error al enviar el correo: " + e.getMessage());
             }
 
             return repositorio.save(reserva);
         }
-        return null;
 
+        return null;
     }
+
 
     public Optional<Reserva> buscarPorId(Long id) {
         return repositorio.findById(id);
     }
-
     public void eliminar(Long id) {
         repositorio.deleteById(id);
     }
+
 
 }

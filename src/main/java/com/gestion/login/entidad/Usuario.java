@@ -13,16 +13,18 @@ public class Usuario {
 
     private String nombre;
     private String contrasena;
+    private String correo;
 
     private int tipoUsuario;
     public Usuario() {
     }
 
-    public Usuario(Long id, String nombre, String contrasena, int tipoUsuario) {
+    public Usuario(Long id, String nombre, String contrasena, int tipoUsuario, String correo) {
         this.id = id;
         this.nombre = nombre;
         this.contrasena = contrasena;
         this.tipoUsuario = tipoUsuario;
+        this.correo = correo;
     }
 
     public Long getId() {
@@ -55,6 +57,14 @@ public class Usuario {
 
     public void setTipoUsuario(int tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     @Override

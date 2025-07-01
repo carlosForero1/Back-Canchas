@@ -17,13 +17,14 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepositorio repositorio;
 
-    public UsuarioDto registrar(String nombre, String contrasena) {
+    public UsuarioDto registrar(String nombre,String correo, String contrasena) {
         try {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             String contrasenaEncriptada = encoder.encode(contrasena);
             Usuario usuario = new Usuario();
 
             usuario.setNombre(nombre);
+            usuario.setCorreo(correo);
             usuario.setContrasena(contrasenaEncriptada);
             usuario.setTipoUsuario(1);
             repositorio.save(usuario);
@@ -31,6 +32,7 @@ public class UsuarioService {
 
             UsuarioDto usu = new UsuarioDto();
             usu.setNombre(usuario.getNombre());
+            usu.setCorreo(usuario.getCorreo());
             usu.setTipoUsuario(usuario.getTipoUsuario());
             return usu;
         } catch (Exception e) {
@@ -49,6 +51,8 @@ public class UsuarioService {
             if (passwordOk) {
                 UsuarioDto usuarioDto = new UsuarioDto();
                 usuarioDto.setNombre(usuario.getNombre());
+                usuarioDto.setCorreo(usuario.getCorreo());
+                usuarioDto.setId(usuario.getId());
                 usuarioDto.setTipoUsuario(usuario.getTipoUsuario());
                 return usuarioDto;
             }

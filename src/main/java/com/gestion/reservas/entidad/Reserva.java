@@ -1,7 +1,7 @@
 package com.gestion.reservas.entidad;
 
+import com.gestion.login.entidad.Usuario; // Importa tu entidad Usuario
 import jakarta.persistence.*;
-
 import java.util.Date;
 
 @Entity
@@ -10,8 +10,8 @@ public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nombre;
-    private String correo;
     private String numeroContacto;
     private Date horarioReserva;
     private int cantidadPersonas;
@@ -20,22 +20,22 @@ public class Reserva {
     @JoinColumn(name = "cancha_id", nullable = true)
     private Cancha cancha;
 
-
-
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = true)
+    private Usuario usuario;
 
     public Reserva() {
     }
 
-    public Reserva(Long id, String nombre, String correo,
-                   String numeroContacto, Date horarioReserva,
-                   int cantidadPersonas, Cancha cancha) {
+    public Reserva(Long id, String nombre, String numeroContacto, Date horarioReserva,
+                   int cantidadPersonas, Cancha cancha, Usuario usuario) {
         this.id = id;
         this.nombre = nombre;
-        this.correo = correo;
         this.numeroContacto = numeroContacto;
         this.horarioReserva = horarioReserva;
         this.cantidadPersonas = cantidadPersonas;
         this.cancha = cancha;
+        this.usuario = usuario;
     }
 
     public Long getId() {
@@ -48,14 +48,6 @@ public class Reserva {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
     }
 
     public String getNumeroContacto() {
@@ -82,6 +74,14 @@ public class Reserva {
         this.cancha = cancha;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     public int getCantidadPersonas() {
         return cantidadPersonas;
     }
@@ -92,12 +92,14 @@ public class Reserva {
 
     @Override
     public String toString() {
-        return "reserva{" +
+        return "Reserva{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", correo='" + correo + '\'' +
                 ", numeroContacto='" + numeroContacto + '\'' +
                 ", horarioReserva=" + horarioReserva +
+                ", cantidadPersonas=" + cantidadPersonas +
+                ", cancha=" + (cancha != null ? cancha.getNombre() : null) +
+                ", usuario=" + (usuario != null ? usuario.getNombre() : null) +
                 '}';
     }
 }

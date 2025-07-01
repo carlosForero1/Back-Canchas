@@ -9,5 +9,4 @@ import java.util.List;
 
 @Repository
 public interface ReservaRepositorio extends JpaRepository<Reserva, Long> {
-    List<Reserva> findByCorreo(String correo);;
 }

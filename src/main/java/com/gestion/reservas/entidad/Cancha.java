@@ -17,17 +17,19 @@ public class Cancha {
     private String precio;
     private String imagen;
     private String descripcion;
+    private int reservadaCuenta;
 
     public Cancha() {
     }
 
-    public Cancha(Long id, String nombre, int capacidad, String precio, String imagen, String descripcion) {
+    public Cancha(Long id, String nombre, int capacidad, String precio, String imagen, String descripcion,int reservadaCuenta) {
         this.id = id;
         this.nombre = nombre;
         this.capacidad = capacidad;
         this.precio = precio;
         this.imagen = imagen;
         this.descripcion =descripcion;
+        this.reservadaCuenta = reservadaCuenta;
     }
 
     public Long getId() {
@@ -76,6 +78,14 @@ public class Cancha {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public int getReservadaCuenta() {
+        return reservadaCuenta;
+    }
+
+    public void setReservadaCuenta(int reservadaCuenta) {
+        this.reservadaCuenta = reservadaCuenta;
     }
 
     @Override

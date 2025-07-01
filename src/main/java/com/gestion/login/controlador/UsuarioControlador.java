@@ -19,7 +19,7 @@ public class UsuarioControlador {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Usuario usuario) {
-        UsuarioDto nuevo = usuarioService.registrar(usuario.getNombre(), usuario.getContrasena());
+        UsuarioDto nuevo = usuarioService.registrar(usuario.getNombre(),usuario.getCorreo(), usuario.getContrasena());
         if (nuevo != null) {
             return ResponseEntity.ok(nuevo);
         } else {
